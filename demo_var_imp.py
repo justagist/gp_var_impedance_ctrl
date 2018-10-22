@@ -6,7 +6,7 @@ from spring_env_1d import LinearSpring1D, NonLinearSpring1D
 
 
 kp_min = 0.01
-kp_max = 100000
+kp_max = 2500
 
 C = 10 # from paper
 min_var = .001
@@ -30,10 +30,10 @@ def compute_stiffness(cov):
 if __name__ == '__main__':
     
     stiffness = 2.5
-    spring = LinearSpring1D(stiffness)
+    # spring = LinearSpring1D(stiffness)
     
-    # spring = NonLinearSpring1D()
-    obj = PointMassObj1D(mass = 50)
+    spring = NonLinearSpring1D()
+    obj = PointMassObj1D(mass = 5)
 
 
 
@@ -66,10 +66,11 @@ if __name__ == '__main__':
         ff_pred, cov = ff_model.predict(np.asarray([[ext]]))
         # print ff_pred, cov
         k = compute_stiffness(cov)
-
+        # print k
         computed_force = k*(99*0.5 - ext) + ff_pred
 
         resistance_force_actual = spring.compute_resistance(ext)
+        # print resistance_force_actual
 
         ext, obj_u = obj.apply_force(computed_force - resistance_force_actual, obj_u)
 

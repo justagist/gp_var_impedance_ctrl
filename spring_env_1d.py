@@ -44,8 +44,8 @@ class NonLinearSpring1D:
         self._k_func = k_func
 
     def compute_resistance(self, extension):
-
-        return (extension * self._k_func(np.asarray(extension).reshape([1,1])))[0]
+        # print (extension * self._k_func(np.asarray(extension).reshape([1,1])))
+        return (extension * self._k_func(np.asarray(extension).reshape([1,1])))[0,0]
 
     def compute_resistance_traj(self, extension_traj):
 
